@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!
+{% endblock %}
+
+{% block body %}
+	<div class="example-wrapper">
+		<h1>{{post.title}}</h1>
+		<div>
+			<div class="post-container">
+				<p>{% apply markdown_to_html %}{{post.content}}{% endapply %}</p>
+				<p>Published by |
+					{{post.author.fullName}}
+					|
+					{{post.publishedAt|date("d M Y -- H:i")}}
+				</p>
+				{% if post.updatedAt != null %}
+					<p>Updated at |
+						{{post.updatedAt|date("d M Y -- H:i")}}
+					</p>
+				{% endif %}
+				<h5>{{post.slug}}</h5>
+			</div>
+			<div class="comment-section">
+				<h1>Comment section</h1>
+				<div class="comment">
+					<h4>Benidris</h4>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit iusto animi est, nulla consectetur ipsam voluptatem saepe quo neque atque deserunt cum assumenda voluptas facere praesentium suscipit qui non quis.</p>
+					<p>Published |
+					</p>
+				</div>
+				<div class="comment">
+					<h4>Benidris</h4>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit iusto animi est, nulla consectetur ipsam voluptatem saepe quo neque atque deserunt cum assumenda voluptas facere praesentium suscipit qui non quis.</p>
+					<p>Published |
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

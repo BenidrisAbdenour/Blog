@@ -1,0 +1,35 @@
+{% extends 'adminLayout.html.twig' %}
+
+{% block title %}Hello PostController!
+{% endblock %}
+
+{% block body %}
+	<div class="example-wrapper">
+		<h1>All Posts</h1>
+
+		<div>
+			<div class="post-container">
+				<table id="posts">
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>published at</th>
+						<th>Action</th>
+					</tr>
+					{% for post in posts %}
+						<tr>
+							<td>{{post.id}}</td>
+							<td>{{post.title}}</td>
+							<td>{{post.publishedAt|date('d M Y -- H:i')}}</td>
+							<td>
+								<a class="btn btn-show" href="{{path("app_showPost",{id:post.id})}}">Show post</a>
+								<a class="btn btn-edit" href="{{path("app_edit",{id:post.id})}}">Edit post</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}
