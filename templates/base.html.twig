@@ -20,7 +20,12 @@
 	<body>
 		<nav class="nav-bar">
 			<a href="{{path("app_user_index")}}">Home</a>
-			<a href="{{path("app_manage_posts")}}">Admin</a>
+			{% if app.user %}
+				{% if app.user.Roles[0]=="ROLE_ADMIN" %}
+					<a href="{{path("app_manage_posts")}}">Admin</a>
+				{% endif %}
+			{% endif %}
+			<a href="{{app.user ? path('app_logout') : path('app_login') }}">{{app.user ? 'Logout' : 'Login'}}</a>
 		</nav>
 		{% block body %}{% endblock %}
 	</body>

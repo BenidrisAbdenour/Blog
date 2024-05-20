@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,9 +17,11 @@ class BlogController extends AbstractController
 {
 
     private $em;
+    private $security;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Security $security)
     {
+        $this->security = $security;
         $this->em = $entityManager;
     }
 
@@ -62,7 +64,8 @@ class BlogController extends AbstractController
     {
 
         $post = new Post();
-
+        $user = $this->security->getUser();
+        $post->setAuthor($user);
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
