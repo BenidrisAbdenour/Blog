@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Post;
-// use App\Entity\Tag;
+use App\Entity\Tag;
 // use App\Entity\User;
-// use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,8 +41,15 @@ class PostType extends AbstractType
                     'class' => 'textarea-form',
                     'placeholder' => 'Enter Content...'
                 )
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                "attr" => array(
+                    'class' => 'select-form',
+                )
             ]);
-
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
 
             $post = $event->getData();
@@ -61,11 +68,7 @@ class PostType extends AbstractType
             //                 'class' => User::class,
             // 'choice_label' => 'id',
             //             ])
-            //             ->add('tags', EntityType::class, [
-            //                 'class' => Tag::class,
-            // 'choice_label' => 'id',
-            // 'multiple' => true,
-            //             ])
+
         ;
     }
 

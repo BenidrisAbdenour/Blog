@@ -21,6 +21,7 @@
 		<nav class="nav-bar">
 			<a href="{{path("app_user_index")}}">Blog</a>
 			<a href="{{path("app_create")}}">Create Post</a>
+			<a href="{{path("app_createTag")}}">Create Tag</a>
 			<a href="{{path("app_manage_posts")}}">Manage Posts</a>
 			<a href="{{app.user ? path('app_logout') : path('app_login') }}">{{app.user ? 'Logout' : 'Login'}}</a>
 		</nav>

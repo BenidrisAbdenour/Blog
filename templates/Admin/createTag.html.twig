@@ -1,0 +1,25 @@
+{% extends 'adminLayout.html.twig' %}
+
+{% block title %}Hello PostController!
+{% endblock %}
+
+{% block body %}
+	<div class="example-wrapper">
+		<div class="form-container">
+			<h1>Add Tag</h1>
+			{{ form_start(form) }}
+			<div class="row">
+				{{ form_label(form.name) }}
+				{{ form_widget(form.name) }}
+				{{ form_errors(form.name) }}
+			</div>
+			<div class="row">
+				{{ form_label(form.posts) }}
+				{{ form_widget(form.posts) }}
+				{{ form_errors(form.posts) }}
+			</div>
+			<button type="submit" class="btn btn-create">Create</button>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

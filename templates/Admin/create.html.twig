@@ -23,6 +23,11 @@
 				{{ form_widget(form.content) }}
 				{{ form_errors(form.content) }}
 			</div>
+			<div class="row">
+				{{ form_label(form.tags) }}
+				{{ form_widget(form.tags) }}
+				{{ form_errors(form.tags) }}
+			</div>
 			<button type="submit" class="btn btn-create">Create</button>
 			{{ form_end(form) }}
 		</div>

@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use App\Entity\Tag;
 use App\Form\PostType;
+use App\Form\TagType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +32,7 @@ class BlogController extends AbstractController
     #[Route('manage', name: 'manage_posts')]
     public function index(PostRepository $repository): Response
     {
-        $posts = $repository->findAll();
+        $posts = $repository->findby([], ["published_at" => "DESC"]);
         return $this->render('Admin/index.html.twig', [
             'posts' => $posts,
         ]);
@@ -98,6 +100,27 @@ class BlogController extends AbstractController
         }
 
         return $this->render("Admin/edit.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
+
+    // ******** Tags
+
+    #[Route('createTag', name: 'createTag')]
+    public function createTag(Request $request): Response
+    {
+
+        $tag = new Tag();
+        $form = $this->createForm(TagType::class, $tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($tag);
+            $this->em->flush();
+            return $this->redirectToRoute("app_create");
+        }
+
+        return $this->render("Admin/createTag.html.twig", [
             "form" => $form->createView()
         ]);
     }
