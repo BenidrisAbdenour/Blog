@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\PostRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,11 +29,25 @@ class BlogController extends AbstractController
     }
 
     #[Route('', name: 'index')]
-    public function index(PostRepository $repository): Response
+    public function index(TagRepository $tagRepository, PostRepository $repository): Response
     {
         $posts = $repository->findby([], ["published_at" => "DESC"]);
+        $tags = $tagRepository->findby([], ["id" => "DESC"]);
         return $this->render('User/index.html.twig', [
             'posts' => $posts,
+            'tags' => $tags,
+        ]);
+    }
+
+
+    #[Route('postsByTag{id}', name: 'postsByTag')]
+    public function postsByTag($id, TagRepository $tagRepository): Response
+    {
+        $tag = $tagRepository->findOneBy(["id" => $id], ["id" => "DESC"]);
+        $tags = $tagRepository->findMinus(["id" => $id]);
+        return $this->render('User/postsByTag.html.twig', [
+            'tag' => $tag,
+            'tags' => $tags
         ]);
     }
 

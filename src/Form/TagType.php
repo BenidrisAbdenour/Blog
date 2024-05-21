@@ -20,16 +20,16 @@ class TagType extends AbstractType
                     'class' => 'input-form',
                     'placeholder' => 'Enter tag name...'
                 )
-            ])
-            ->add('posts', EntityType::class, [
-                "required" => false,
-                'class' => Post::class,
-                'choice_label' => 'title',
-                'multiple' => true,
-                "attr" => array(
-                    'class' => 'select-form',
-                )
             ]);
+        // ->add('posts', EntityType::class, [
+        //     "required" => false,
+        //     'class' => Post::class,
+        //     'choice_label' => 'title',
+        //     'multiple' => true,
+        //     "attr" => array(
+        //         'class' => 'select-form',
+        //     )
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

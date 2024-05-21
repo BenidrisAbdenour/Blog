@@ -5,21 +5,38 @@
 
 {% block body %}
 	<div class="example-wrapper">
-		<h1>All Posts</h1>
+		<div class="container-content">
+			<div class="main">
+				<h1>All Posts</h1>
 
-		<div>
-			{% for post in posts %}
-				<div class="post-container">
-					<a class="post-title" href="{{path("app_user_showPost",{id:post.id})}}">
-						<h1>{{post.title|capitalize}}</h1>
-					</a>
-					<p>{{post.summary}}</p>
-					<p>{{post.author.fullName}}
-						|
-						{{post.publishedAt|date("d M Y -- H:i")}}</p>
+				<div>
+					{% for post in posts %}
+						<div class="post-container">
+							<a class="post-title" href="{{path("app_user_showPost",{id:post.id})}}">
+								<h1>{{post.title|capitalize}}</h1>
+							</a>
+							<p>{{post.summary}}</p>
+							<p>{{post.author.fullName}}
+								|
+								{{post.publishedAt|date("d M Y -- H:i")}}</p>
+						</div>
+					{% endfor %}
 				</div>
-			{% endfor %}
+			</div>
+			<div class="side-bar">
+				<h1>Categories</h1>
+				{% if tags|length > 0 %}
+					<div class="categories">
+						{% for tag in tags %}
+							<a href="{{path("app_user_postsByTag",{id:tag.id})}}">{{tag.name}}</a>
+						{% endfor %}
+					</div>
+				{% else %}
+					<h3>No categories available</h3>
+				{% endif %}
+			</div>
 		</div>
+
 
 	</div>
 {% endblock %}

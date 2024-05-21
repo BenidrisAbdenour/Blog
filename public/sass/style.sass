@@ -226,3 +226,38 @@ body {
     margin: 10px;
   }
 }
+
+.container-content {
+  display: flex;
+  .side-bar {
+    border: 2px solid rgba(0, 0, 0, 0.47);
+    background-color: #ddd;
+    border-radius: 10px;
+    margin: 2px;
+    width: 30%;
+    padding: 10px;
+    .categories {
+      height: auto;
+      min-height: 400px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      a {
+        font-size: 19px;
+        text-decoration: none;
+        color: black;
+        transition: 0.2s;
+        margin: 5px 0;
+        &:hover {
+          text-decoration: underline;
+          color: #140463;
+        }
+      }
+    }
+  }
+  .main {
+    margin: 2px;
+    width: 70%;
+    padding: 10px;
+  }
+}
