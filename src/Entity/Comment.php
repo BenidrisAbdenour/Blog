@@ -28,6 +28,11 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    public function __construct()
+    {
+        $this->published_at = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
