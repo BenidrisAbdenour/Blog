@@ -6,6 +6,19 @@
 {% block body %}
 	<div class="example-wrapper">
 		<h1>{{post.title}}</h1>
+		<div class="tags-container">
+			<h3>Tags :</h3>
+			{% if post.tags|length > 0 %}
+				{% for tag in post.tags %}
+					<div class="tag">
+						{{tag.name}}
+					</div>
+				{% endfor %}
+			{% else %}
+				<h3>No tags</h3>
+			{% endif %}
+
+		</div>
 		<div>
 			<div class="post-container">
 				<p>{% apply markdown_to_html %}{{post.content}}{% endapply %}</p>

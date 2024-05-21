@@ -44,7 +44,7 @@ class BlogController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         $comments = $commentRepository->findby(["post" => $id], ["published_at" => "DESC"]);
-        // dd($comments);
+        // dd($post->getTags());
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user = $this->security->getUser()) {
                 $comment->setAuthor($user);
