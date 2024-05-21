@@ -21,20 +21,38 @@
 				{% endif %}
 				<h5>{{post.slug}}</h5>
 			</div>
+			{% if app.user %}
+				<div class="comment-form">
+					<h2>Write a comment</h2>
+					{{ form_start(form) }}
+					<div class="row">
+						{{ form_label(form.content) }}
+						{{ form_widget(form.content) }}
+						{{ form_errors(form.content) }}
+					</div>
+					<button class="btn btn-edit" type="submit" class="btn btn-create">Share</button>
+					{{ form_end(form) }}
+				</div>
+			{% endif %}
 			<div class="comment-section">
 				<h1>Comment section</h1>
-				<div class="comment">
-					<h4>Benidris</h4>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit iusto animi est, nulla consectetur ipsam voluptatem saepe quo neque atque deserunt cum assumenda voluptas facere praesentium suscipit qui non quis.</p>
-					<p>Published |
-					</p>
-				</div>
-				<div class="comment">
-					<h4>Benidris</h4>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit iusto animi est, nulla consectetur ipsam voluptatem saepe quo neque atque deserunt cum assumenda voluptas facere praesentium suscipit qui non quis.</p>
-					<p>Published |
-					</p>
-				</div>
+				{% if  comments|length > 0 %}
+					{% for comment in comments %}
+						<div class="comment">
+							<h3>@
+								{{comment.author.username}}</h3>
+							<p>{{comment.content}}</p>
+							<p>Published |
+								{{comment.publishedAt|date("d M Y -- H:i")}}
+							</p>
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="comment">
+						<h2>No comments to display</h2>
+					</div>
+				{% endif %}
+
 			</div>
 		</div>
 	</div>
